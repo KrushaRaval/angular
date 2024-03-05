@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h3>Login Form</h3>
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="abc@gmail.com" required>
+      <p *ngIf="isValid && loginForm.get('email')?.status == 'INVALID'" style="color: red;">Email Is Required</p>
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="123.." required>
+      <p *ngIf="isValid && loginForm.get('password')?.status == 'INVALID'" style="color: red;">Password Is Required</p>
+    </div>
+    <!-- Render dynamic fields -->
+    <div formGroupName="dynamicFieldsGroup">
+      <div *ngFor="let field of dynamicFields">
+        <div>
+          <label>{{ field.label }}</label>
+          <input class="dynamic" [type]="field.type" [formControlName]="field.controlName" placeholder="{{ field.label }}">
+          <p *ngIf="isValid && dynamicFieldsGroup.get(field.controlName)?.status == 'INVALID'" style="color: red;">{{ field.label }} Is Required</p>
+        </div>
+      </div>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>

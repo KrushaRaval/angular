@@ -1,92 +1,40 @@
 <div>
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <h3>SignUp Form</h3>
-    <div>
-      <label>Name</label>
-      <input type="text" formControlName="name" placeholder="abc" required>
-      <p *ngIf="isValid && signupForm.get('name')?.status == 'INVALID'" style="color: red;">Name Is Required</p>
-    </div>
-    <div>
-      <label>Email</label>
-      <input type="email" formControlName="email" placeholder="abc@gmail.com" required>
-      <p *ngIf="isValid && signupForm.get('email')?.status == 'INVALID'" style="color: red;">Email Is Required</p>
-    </div>
-    <div>
-      <label>Password</label>
-      <input type="password" formControlName="password" placeholder="123.." required>
-      <p *ngIf="isValid && signupForm.get('password')?.status == 'INVALID'" style="color: red;">Password Is Required</p>
-    </div>
-<!-- Loop through form array and render dynamic fields -->
-<div formArrayName="fields">
-  <div *ngFor="let field of fields.controls; let i = index">
-    <div [formGroupName]="i">
-      <input type="text" formControlName="label" placeholder="Label">
-      <input type="text" formControlName="type" placeholder="Type">
-      <button type="button" (click)="removeFields(i)">Remove</button>
-    </div>
-  </div>
-</div>
-<button type="button" (click)="addFields()">Add Fields</button>
-<button type="submit">Sign Up</button>
-</form>
-</div>
-
-<table *ngIf="signedUpUsers.length > 0">
-<thead>
-<tr>
-  <th>Name</th>
-  <th>Email</th>
-  <th>Password</th>
-  <th>Dynamic Fields</th>
-  <th>Actions</th>
-</tr>
-</thead>
-<tbody>
-  <tr *ngFor="let user of signedUpUsers; let i = index">
-    <td>{{ user.name }}</td>
-    <td>{{ user.email }}</td>
-    <td>{{ user.password }}</td>
-    <td>
-      <div *ngFor="let field of user.fields">
-        {{ field.label }}: {{ field.type }}
-      </div>
-    </td>
-    <td>
-      <button (click)="editUser(i)">Edit</button>
-      <button (click)="deleteUser(i)">Delete</button>
-    </td>
-  </tr>
-</tbody>
-<button (click)="clearTable()" class="clear">Clear Table</button>
-</table>
-
-<!-- Edit Form -->
-<div *ngIf="editingIndex !== -1">
-  <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
-    <h3>Edit User</h3>
-    <div>
-      <label>Name</label>
-      <input type="text" formControlName="name" placeholder="abc" required>
-    </div>
-    <div>
-      <label>Email</label>
-      <input type="email" formControlName="email" placeholder="abc@gmail.com" required>
-    </div>
-    <div>
-      <label>Password</label>
-      <input type="password" formControlName="password" placeholder="123.." required>
-    </div>
-    <!-- Loop through form array and render dynamic fields -->
-    <div formArrayName="fields">
-      <div *ngFor="let field of editFields.controls; let i = index">
-        <div [formGroupName]="i">
-          <input type="text" formControlName="label" placeholder="Label">
-          <input type="text" formControlName="type" placeholder="Type">
-          <button type="button" (click)="removeEditFields(i)">Remove</button>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <h3>SignUp Form</h3>
+        <div>
+            <label>Name</label>
+            <input type="text" formControlName="userName" placeholder="abc" required>
+            <p *ngIf="isValid && signupForm.get('userName')?.status == 'INVALID'" style="color: red;">Name Is Required</p>
         </div>
+        <div>
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="abc@gmail.com" required>
+            <p *ngIf="isValid && signupForm.get('email')?.status == 'INVALID'" style="color: red;">Email Is Required</p>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" formControlName="password" placeholder="123.." required>
+            <p *ngIf="isValid && signupForm.get('password')?.status == 'INVALID'" style="color: red;">Password Is
+                Required</p>
+        </div>
+        <div>
+            <label>confirm Password</label>
+            <input type="password" formControlName="confirmPassword" placeholder="123.." required>
+            <p *ngIf="isValid && signupForm.get('confirmPassword')?.status == 'INVALID'" style="color: red;">Confirm Password Is
+                Required</p>
+        </div>
+        <div>
+            <label>Roles</label>
+            <select formControlName="userRole">
+              <option value="" disabled>Select a role</option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+            <p *ngIf="isValid && signupForm.get('userRole')?.status == 'INVALID'" style="color: red;">UserRole Is Required</p>
+          </div>
+        <button type="submit">Sign Up</button>
+    </form>
+    <div class="login-link" style="display: flex;justify-content: center;" >
+        <p>Already have an account? <a (click)="toggleLoginForm()">Login here.</a></p>
       </div>
-    </div>
-    <button type="submit">Save Changes</button>
-    <button type="button" (click)="cancelEdit()">Cancel</button>
-  </form>
 </div>

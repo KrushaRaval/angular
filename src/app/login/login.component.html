@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
     <h3>Login Form</h3>
     <div>
       <label>Email</label>
@@ -11,16 +11,9 @@
       <input type="password" formControlName="password" placeholder="123.." required>
       <p *ngIf="isValid && loginForm.get('password')?.status == 'INVALID'" style="color: red;">Password Is Required</p>
     </div>
-    <!-- Render dynamic fields -->
-    <div formGroupName="dynamicFieldsGroup">
-      <div *ngFor="let field of dynamicFields">
-        <div>
-          <label>{{ field.label }}</label>
-          <input class="dynamic" [type]="field.type" [formControlName]="field.controlName" placeholder="{{ field.label }}">
-          <p *ngIf="isValid && dynamicFieldsGroup.get(field.controlName)?.status == 'INVALID'" style="color: red;">{{ field.label }} Is Required</p>
-        </div>
-      </div>
-    </div>
     <button type="submit">Login</button>
   </form>
+  <div style="display: flex;justify-content: center;">
+    <p>Don't have an account? <a (click)="toggleLoginForm()">SignUp here.</a></p>
+  </div>
 </div>

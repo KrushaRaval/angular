@@ -1,11 +1,1 @@
-<app-login *ngIf="showLoginForm" ></app-login>
-<app-signup *ngIf="!showLoginForm"></app-signup>
-
-<div *ngIf="!showLoginForm" class="login-link" style="display: flex;justify-content: center;" >
-  <p>Already have an account? <a (click)="toggleLoginForm()">Login here.</a></p>
-</div>
-
-<div *ngIf="showLoginForm" style="display: flex;justify-content: center;">
-  <p>Don't have an account? <a (click)="toggleLoginForm()">SignUp here.</a></p>
-</div>
-
+<router-outlet></router-outlet>

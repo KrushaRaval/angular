@@ -3,22 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppointmentService } from './appointment.service'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     SignupComponent,
+    LoginComponent,
+    CalendarComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FullCalendarModule,
+    HttpClientModule,
+    CommonModule  
   ],
-  providers: [],
+  providers: [AppointmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
